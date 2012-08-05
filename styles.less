@@ -1,98 +1,193 @@
-header, footer, #separator-2{
-	margin : 0 auto;
-	width : 900px;
+@font-face {
+    font-family: 'Matchbook';
+    src: url('fonts/Matchbook-webfont.eot');
+    src: url('fonts/Matchbook-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Matchbook-webfont.woff') format('woff'),
+         url('fonts/Matchbook-webfont.ttf') format('truetype'),
+         url('fonts/Matchbook-webfont.svg#MatchbookMatchbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-header{
-	height: 400px ;
+@font-face {
+	font-family:"Futura";  
+	src: url(./fonts/Futura.ttf) format("truetype"); 
+    font-weight: normal;
+    font-style: normal;
 }
 
-header #links {
-	text-align: right; 
+@font-face {
+    font-family: 'Marmellata';
+    src: url('fonts/marmellata-webfont.eot');
+    src: url('fonts/marmellata-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/marmellata-webfont.woff') format('woff'),
+         url('fonts/marmellata-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-header #links a:nth-child(-n+3):after{
-	content : " / ";
-	color : pink ;
+@base-width : 900px; 
+
+* { padding: 0 ; margin : 0 ;}
+
+.center{ margin : 0 auto ; width : @base-width; }
+ 
+.separator{
+	clear : both;
+	margin : 5px auto 25px ; 
+	height : 1px ;
+	background-image: url(img/separator.png);
+	background-repeat: repeat-x ; 
+
+	#right-flowers{
+		float : right ;
+		margin-top   : -50px;
+		margin-right : -50px;
+	}
+
+	#left-flowers{
+		margin-top   : -95px;
+		margin-left : -55px;
+	}
+
+	#arrows{
+		.center; 
+		display: block ;
+		width : 76px;
+		background-color: white ;
+		padding: 0 10px ; 
+	}
+
 }
 
-header #links a{
-	color : black ;
-	text-decoration: none; 
-}
+body {.center;}
 
-header #separator-1 {
-	margin-top: 5px; 
-	margin-bottom: 25px; 
+header {
 
-	width: 903px ;
-	height : 8px ;
-	background-image: url(img/separator-1.png);
-}
+	height      : 400px ;
+	font-family : 'Matchbook';
+	font-size   : 1.7em ;
 
-header #banner #pink-block {
-	background-image: url(img/pink-block.png);
-	width: 900px; 
-	height: 228px; 
-}
+	#name {
+		float   : left; 
+	}
 
-header #banner #pink-block #animals{
-	width: 540px; 
-	text-align: center ;
-	margin: 0 auto ; 
-}
+	#links {
+		margin-top : 12px;
+		text-align : right;
+		a{
+			color  : black ;
+			text-decoration: none; 
 
-header #banner #pink-block #animals #birds{
-	background-image: url(img/birds.png);
-	float : left ;
-	background-position: bottom ;
-	background-repeat: no-repeat;
-	height: 300px; 
-	width: 180px;
-}
-
-header #banner #pink-block #animals #moose{
-	background-image: url(img/moose.png);	
-	float: right ;
+			&:nth-child(-n+5):after{
+				content : " / ";
+				color   : pink ;
+			}
+		}
+	}
 
 
-	background-position: bottom ;
-	background-repeat: no-repeat;
-	height: 300px; 	
-	width: 180px;	
-}
 
-header #banner #pink-block #animals #welcome{
-	display: block; 
-	float: left ;
-	width : 180px ;
-	padding-top: 260px ; 
-}
+	#banner {
+		#pink-block {
+			background-image: url(img/pink-block.png);
+			height: 228px; 
 
-#separator-2 {
-	margin-top: -55px;
-	margin-bottom: -55px;
-	width: 1000px;
-	height: 102px;
-	background-image: url(img/separator-2.png);
-	background-position: right;
-	background-repeat: no-repeat;
+			#animals{
+				width      : 540px  ; 
+				text-align : center ;
+				margin     : 0 auto ; 
+
+				.animal {
+					height : 300px ; 
+					width  : 180px ;
+				}
+
+				#birds{
+					background : url(img/birds.png) no-repeat bottom ;
+					float : left ;
+				}
+
+				#moose{
+					background: url(img/moose.png) no-repeat bottom ;	
+					float: right ;
+				}
+				
+				#welcome{
+					float : left ;
+					width : 180px ;
+					padding-top: 260px ; 
+				}
+			}
+		}
+	}
 }
 
 #content{
-	width : 855px;
-	margin : 0 auto ; 
+	.center; 
+	width: 855px;
+	.column {
+
+		float : left ; 
+		
+		.project-block {
+			clear : both ;
+			margin : 38px 19px ;
+
+			height : 247px; 
+			width  : 247px; 
+			overflow: hidden ;	
+
+
+
+			img{
+				width: 247px; 
+				height : 247px;
+			}
+
+			.description{
+				width: 247px; 
+				height : 250px;
+				background-color: #b4cea7 ; 
+				position: relative;
+				top : -3px ;
+				text-align: center; 
+				
+				h1{
+					font-size: 1.3em;
+					padding-top: 105px ;
+					font-family : 'Marmellata';
+				}
+
+				h2{
+					font-size: 1em;
+					font-family: "Futura"; 
+					font-weight :normal;
+
+				}
+
+			}
+		}
+	}
+
+	#column2 {
+		margin-top : 30px ; 
+	}
 }
 
-#content .column {
-	float : left ; 
-}
+footer {
+	clear : both;
+	height: 135px ;
+	top: -170px;
+	position: relative;
+	.center ;
+	background-image: url(img/background-birds.png) ;
+	background-position: top right; 
+	background-repeat: no-repeat ;
 
-#content #column2 {
-	margin-top: 30px ; 
-}
-
-#content .column .project-block {
-	margin: 38px 19px ;
-	height: 247px; 
+	.separator {
+		background-position: bottom ;
+		padding-top: 175px ;
+	}
 }

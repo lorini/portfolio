@@ -5,57 +5,79 @@
 
 	<link   type="text/css" rel="stylesheet/less"  href="styles.less">
 	<script type="text/javascript" src="js/less.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://github.com/janl/mustache.js/raw/master/mustache.js"></script>  
 
+	<script id="template-project" type="text/template">
+		{{#columns}}
+		<div id="{{id}}" class="column">
+			{{#projects}}
+			<div class="project-block" data-color="{{color}}">
+				<img src="img/{{image}}" />
+				<div class="description">
+					<h1>{{title}}</h1> 
+					<h2>{{type}}</h2>
+				</div>
+			</div>
+			{{/projects}} 
+		</div>
+		{{/columns}}
+	</script>
+
+	<script type="text/javascript">
+
+		$(function(){	
+			$.getJSON("projects.json", function(data){
+				$("#content").append(Mustache.to_html($("#template-project").html(), data))
+						 .find(".project-block, img").on("mouseenter mouseon hover", function(){
+							$(this).find(".description").stop().animate({"top": "-247px"} , 300); 
+						 }).on("mouseleave", function(){
+							$(this).find(".description").stop().animate({"top": "-3px"}   , 300); 
+				});
+			});
+		});
+
+	</script>
 </head>
 <body>
-
+ 
 	<header>
 		<div id="links">
-			<a href="">facebook		</a> 
-			<a href="">twitter		</a>    
-			<a href="">pinterest	</a> 
-			<a href="">blog			</a>
+			<div id="name">Anais Profit</div>
+			<img id="drops" src="img/drops.png"></img>
+			<a href="http://www.facebook.com/anais.profit" 	target="_blank">facebook	</a> 
+			<a href="http://twitter.com/AnaisISWT" 			target="_blank">twitter		</a>    
+			<a href="http://pinterest.com/" 				target="_blank">pinterest	</a> 
+			<a href="http://www.instylewetrust.com/" 		target="_blank">blog		</a>
 		</div>
 
-		<div id="separator-1"></div>
+		<div class="separator">
+			<img id="arrows" src="img/arrows.png"></img>
+		</div>
 
 		<div id="banner">
 			<div id="pink-block">
 				<div id="animals">
-					<div id="birds"></div>
-					<span id="welcome"> <img src="img/down-arrow-1.png"> Bienvenue <img src="img/down-arrow-2.png"></span>
-					<div id="moose"></div>
+					<div id="birds" class="animal"></div>
+					<div id="welcome"> <img src="img/down-arrow-1.png"> Bienvenue <img src="img/down-arrow-2.png"></div>
+					<div id="moose" class="animal"></div>
 				</div>
 			</div>
 		</div>
 
 	</header>
 
-	<div id="separator-2"></div>
-	
-	<div id="content">
-		<div id="column1" class="column">
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-		</div>
-		<div id="column2" class="column">
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-		</div>
-		<div id="column3" class="column">
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-			<div class="project-block"><img src="img/schiever.png" /></div>
-		</div>
+	<div class="separator">
+		<img id="right-flowers" src="img/right-flowers.png"></img>
 	</div>
+	
+	<div id="content"></div>
 
 	<footer>
-
+		<div class="separator">
+			<img id="arrows" src="img/arrows.png"></img>
+			<img id="left-flowers" src="img/left-flowers.png"></img>
+		</div>
 	</footer>
 
 </body>
