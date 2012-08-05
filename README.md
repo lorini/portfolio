@@ -1,4 +1,4 @@
-portfolio_ap
+portfolio
 ============
 
-Portfolio for a friend
+Exemple of portfolio using LESS and mustache.js
