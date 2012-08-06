@@ -2,41 +2,38 @@
 <head>
 	
 	<title></title>
-
 	<link   type="text/css" rel="stylesheet/less"  href="styles.less">
 	<script type="text/javascript" src="js/less.js"></script>
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="http://github.com/janl/mustache.js/raw/master/mustache.js"></script>  
+	<script type="text/javascript" src="js/coffee-script.js"></script>
+	<script type="text/javascript" src="js/mustache.js"></script>  
+	<script type="text/javascript" src="js/jquery.js"></script>
 
-	<script id="template-project" type="text/template">
-		{{#columns}}
-		<div id="{{id}}" class="column">
-			{{#projects}}
-			<div class="project-block" data-color="{{color}}">
-				<img src="img/{{image}}" />
-				<div class="description">
-					<h1>{{title}}</h1> 
-					<span class="arrow"></span>
-					<h2>{{type}}</h2>
-				</div>
-			</div>
-			{{/projects}} 
-		</div>
-		{{/columns}}
+	<script type="text/coffeescript">
+
+		$ -> $.get 'project-template.tmpl', (template) -> 
+				$.getJSON 'projects.json', (projects) -> 
+					$("#content").append(Mustache.to_html template , projects)
+						.find(".project-block")
+							.live "mouseenter mouseon hover" , 	
+								-> $(this).find(".description").stop().animate  top: "-247px", 300
+							.live "mouseleave" , 				
+								-> $(this).find(".description").stop().animate  top:   "-3px", 300
+
+	
 	</script>
 
 	<script type="text/javascript">
 
-		$(function(){	
+		/*$(function(){	
 			$.getJSON("projects.json", function(data){
 				$("#content").append(Mustache.to_html($("#template-project").html(), data))
-						 .find(".project-block, img").on("mouseenter mouseon hover", function(){
+						 .find(".project-block, img").live("mouseenter mouseon hover", function(){
 							$(this).find(".description").stop().animate({"top": "-247px"} , 300); 
-						 }).on("mouseleave", function(){
+						 }).live("mouseleave", function(){
 							$(this).find(".description").stop().animate({"top": "-3px"}   , 300); 
 				});
 			});
-		});
+		});*/
 
 	</script>
 </head>
