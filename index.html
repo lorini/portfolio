@@ -12,19 +12,27 @@
 
 		$ -> $.get 'project-template.tmpl', (template) -> 
 				$.getJSON 'projects.json', (projects) -> 
-					$("#content").append(Mustache.to_html template , projects)
+					$("#content").html(Mustache.render template , projects)
 						.find(".project-block")
 							.live "mouseenter mouseon hover" , 	
 								-> $(this).find(".description").stop().animate  top: "-247px", 300
 							.live "mouseleave" , 				
 								-> $(this).find(".description").stop().animate  top:   "-3px", 300
-	
+							.live "click" , 
+								-> openProject $(this).data("title")
+
+
+		openProject = (title) ->
+			$("body").animate scrollTop : 0 , "fast", -> 
+				$("#banner").animate "opacity" : 0 , 1000 
+				$("#project-detail").animate("opacity" :   1 , 1000)
+									.animate("height"  : 520 , 1000)
+
 	</script>
 
 </head>
 <body>
- 
-	<header>
+ 	<header>
 		<div id="links">
 			<div id="name">Anais Profit</div>
 			<img id="drops" src="img/drops.png"></img>
@@ -49,10 +57,12 @@
 		</div>
 	</header>
 
+	<div id="project-detail"></div>
+
 	<div class="separator">
 		<img id="right-flowers" src="img/right-flowers.png"></img>
 	</div>
-	
+
 	<div id="content"></div>
 
 	<footer>
@@ -61,6 +71,5 @@
 			<img id="left-flowers" src="img/left-flowers.png"></img>
 		</div>
 	</footer>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
 portfolio
 ============
 
-Exemple of portfolio using LESS and mustache.js
+Exemple of portfolio using CoffeeScript, LESS and mustache.js
