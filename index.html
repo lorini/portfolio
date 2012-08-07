@@ -10,23 +10,32 @@
 
 	<script type="text/coffeescript">
 
-		$ -> $.get 'project-template.tmpl', (template) -> 
-				$.getJSON 'projects.json', (projects) -> 
-					$("#content").html(Mustache.render template , projects)
-						.find(".project-block")
-							.live "mouseenter mouseon hover" , 	
-								-> $(this).find(".description").stop().animate  top: "-247px", 300
-							.live "mouseleave" , 				
-								-> $(this).find(".description").stop().animate  top:   "-3px", 300
-							.live "click" , 
-								-> openProject $(this).data("title")
+
+		$ -> $.get 'project-block.tmpl', (template) -> 
+				$.getJSON 'projects.json', (columns) -> 
+					fillContent("#content", template, columns, bindProjectsEvents)
+					
+		fillContent = (id, template, data, callback) -> 			
+			$(id).html(Mustache.render template , data)
+			callback() 
+
+		bindProjectsEvents = -> 
+			$("#content").find(".project-block")
+				.live "mouseenter mouseon hover" , 	
+					-> $(this).find(".description").stop().animate  top: "-247px", 300
+				.live "mouseleave" , 				
+					-> $(this).find(".description").stop().animate  top:   "-3px", 300
+				.live "click" , 
+					-> openProject $(this).data("title")
 
 
 		openProject = (title) ->
-			$("body").animate scrollTop : 0 , "fast", -> 
-				$("#banner").animate "opacity" : 0 , 1000 
+			$("body").animate scrollTop : 0 , "fast" , -> 
+				$("#banner").animate "opacity" : 0 , 1000
 				$("#project-detail").animate("opacity" :   1 , 1000)
 									.animate("height"  : 520 , 1000)
+				$("#project-detail").html("") 
+				 
 
 	</script>
 
